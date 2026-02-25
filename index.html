@@ -2,126 +2,174 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Highlight Industries – Digital Card</title>
-  <meta name="theme-color" content="#3F845B" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Highlight Digital Contact</title>
+
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./assets/icon-192.png" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <meta name="theme-color" content="#3F845B" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Fonts -->
+  <!-- Glacial Indifference isn't on Google Fonts. We'll use a close fallback until you add it locally. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css?v=1" />
 </head>
 <body>
-  <!-- DESKTOP (locked to desktop only via CSS media queries) -->
-  <main id="desktop" class="desktop" aria-label="Desktop digital card">
-    <header class="topbar">
-      <img class="header-banner" src="./assets/header.png" alt="Highlight Industries, Inc." />
-      <div class="search-row">
-        <div class="search-wrap">
-          <input id="searchInput" type="search" placeholder="Search employees…" autocomplete="off" />
-          <div id="searchResults" class="search-results" role="listbox" aria-label="Employee search results"></div>
-        </div>
-        <button id="openBtn" class="btn btn-ghost" type="button" title="Open selected employee">Open</button>
-      </div>
+
+  <!-- Desktop -->
+  <section class="desktop" aria-label="Desktop view">
+    <header class="brandHeader">
+      <img src="./assets/header.png" alt="Highlight Industries" />
     </header>
 
-    <section class="desk-card" aria-live="polite">
-      <div class="desk-left">
-        <h1 class="name">
-          <span id="dFirst" class="first">TARYN</span><br />
-          <span id="dLast" class="last">SWAYZE</span>
-        </h1>
+    <div class="desktopWrap">
+      <div class="topBar">
+        <div class="searchBox">
+          <input id="employeeSearch" class="searchInput" list="employeeList" placeholder="Search employees (name)..." autocomplete="off" />
+          <button id="employeeGo" class="searchGo" type="button">Open</button>
+        </div>
+        <button id="installBtn" class="installBtn" type="button" style="display:none;">Download</button>
+      </div>
+      <datalist id="employeeList"></datalist>
 
-        <div class="title-line">
-          <div class="underline"></div>
-          <div id="dTitle" class="title">Packaging Engineer</div>
+      <div class="cardDesktop" role="region" aria-label="Employee contact card">
+        <div class="cardLeft">
+          <div class="nameBlock">
+            <div class="nameFirst" id="dFirst">Loading…</div>
+            <div class="nameLast" id="dLast"></div>
+            <div class="dividerLine"></div>
+            <div class="title" id="dTitle"></div>
+          </div>
+
+          <div class="contactList">
+            <a class="contactRow" id="dEmailLink" href="#">
+              <span class="ico">✉</span>
+              <span class="txt" id="dEmail"></span>
+            </a>
+            <a class="contactRow" id="dPhoneLink" href="#">
+              <span class="ico">☎</span>
+              <span class="txt" id="dPhone"></span>
+            </a>
+            <a class="contactRow" id="dWebLink" href="#">
+              <span class="ico">🌐</span>
+              <span class="txt" id="dWebsite"></span>
+            </a>
+          </div>
+
+          <div class="btnRow">
+            <button class="btn btnPrimary" id="saveBtnDesktop" type="button">Save to Contacts</button>
+            <button class="btn btnPrimary" id="sendToPhoneDesktop" type="button">Send to Phone</button>
+          </div>
         </div>
 
-        <div class="info">
-          <div class="info-row">
-            <span class="icon">✉</span>
-            <a id="dEmail" href="mailto:taryns@highlightindustries.com">taryns@highlightindustries.com</a>
+        <div class="cardRight">
+          <div class="logoOnGreen">
+            <span class="logoText">HIGHLIGHT</span>
+            <span class="logoSub">INDUSTRIES, INC.</span>
           </div>
-          <div class="info-row">
-            <span class="icon">☎</span>
-            <a id="dPhone" href="tel:+16165312464">616-531-2464 x242</a>
+          <div class="photoCircle">
+            <img id="rightPanelImg" src="./assets/building.jpg" data-fallback="./assets/building.jpg" alt="Employee or Highlight building" />
           </div>
-          <div class="info-row">
-            <span class="icon">⌂</span>
-            <a id="dWeb" href="https://www.highlightindustries.com" target="_blank" rel="noreferrer">www.highlightindustries.com</a>
-          </div>
-        </div>
-
-        <div class="desk-actions">
-          <button id="saveBtnDesktop" class="btn btn-solid" type="button">Save to Contacts</button>
-          <button id="sendBtnDesktop" class="btn btn-solid" type="button">Send to Phone</button>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="desk-right">
-        <div class="green-circle"></div>
-        <div class="photo-wrap">
-          <img id="dPhoto" src="./assets/building.png" alt="Employee photo" />
-        </div>
+  <!-- Mobile -->
+  <section class="mobile" aria-label="Mobile view">
+    <div class="mTopGreen">
+      <div class="mLogo">
+        <span class="mLogoTop">HIGHLIGHT</span>
+        <span class="mLogoBot">INDUSTRIES, INC.</span>
       </div>
-    </section>
-  </main>
-
-  <!-- MOBILE (locked to mobile only via CSS media queries) -->
-  <main id="mobile" class="mobile" aria-label="Mobile digital card">
-    <div class="mobile-hero">
-      <div class="mobile-green"></div>
-      <img class="mobile-logo" src="./assets/header.png" alt="Highlight Industries, Inc." />
-      <div class="mobile-photo-ring">
-        <img id="mPhoto" src="./assets/building.png" alt="Employee photo" />
+      <div class="mPhotoCircle">
+        <img id="mPhoto" src="./assets/building.jpg" data-fallback="./assets/building.jpg" alt="Employee or Highlight building" />
       </div>
     </div>
 
-    <section class="mobile-body" aria-live="polite">
-      <h1 class="m-name">
-        <span id="mFirst" class="m-first">TARYN</span><br/>
-        <span id="mLast" class="m-last">SWAYZE</span>
-      </h1>
+    <div class="mContent">
+      <div class="mNameBlock">
+        <div class="mNameFirst" id="mFirst">Loading…</div>
+        <div class="mNameLast" id="mLast"></div>
+        <div class="mUnderline"></div>
+        <div class="mTitle" id="mTitle"></div>
+      </div>
 
-      <div id="mTitle" class="m-title">Packaging Engineer</div>
-
-      <div class="m-qr">
-        <div class="qr-label">Share</div>
+      <!-- QR between name and picture (Blinq-style) -->
+      <div class="mQrWrap" aria-label="Share QR">
         <img id="mQrImg" alt="QR code" />
       </div>
 
-      <div class="m-info">
-        <div class="m-row">
-          <span class="m-ic">✉</span>
-          <a id="mEmail" href="mailto:taryns@highlightindustries.com">taryns@highlightindustries.com</a>
-        </div>
-        <div class="m-row">
-          <span class="m-ic">☎</span>
-          <a id="mPhone" href="tel:+16165312464">616-531-2464 x242</a>
-        </div>
-        <div class="m-row">
-          <span class="m-ic">⌂</span>
-          <a id="mWeb" href="https://www.highlightindustries.com" target="_blank" rel="noreferrer">www.highlightindustries.com</a>
-        </div>
+      <div class="mContact">
+        <a class="mRow" id="mEmailLink" href="#"><span class="mIco">✉</span><span id="mEmail"></span></a>
+        <a class="mRow" id="mPhoneLink" href="#"><span class="mIco">☎</span><span id="mPhone"></span></a>
+        <a class="mRow" id="mWebLink" href="#"><span class="mIco">🌐</span><span id="mWebsite"></span></a>
       </div>
+    </div>
 
-      <div class="m-actions">
-        <button id="saveBtnMobile" class="btn btn-dark" type="button">Save</button>
-        <button id="shareBtnMobile" class="btn btn-dark" type="button">Share</button>
-        <button id="findBtnMobile" class="btn btn-dark" type="button">Find</button>
-      </div>
-    </section>
-  </main>
+    <div class="mBottomBar">
+      <button class="mBtn mBtnSave" id="saveBtnMobile" type="button">Save</button>
+      <button class="mBtn" id="findBtnMobile" type="button">Find</button>
+      <button class="mBtn" id="shareBtn" type="button">Share</button>
+    </div>
+  </section>
 
-  <!-- MODALS -->
-  <div id="modalBackdrop" class="backdrop hidden" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="modal-head">
-        <div id="modalTitle" class="modal-title">Send to Phone</div>
-        <button id="closeModal" class="btn btn-ghost" type="button">✕</button>
+  <!-- Send to Phone modal (desktop) -->
+  <div class="modal" id="sendModal" aria-hidden="true">
+    <div class="modal__backdrop" id="sendBackdrop"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="sendTitle">
+      <div class="modal__header">
+        <div>
+          <div class="modal__kicker">SEND TO PHONE</div>
+          <div class="modal__title" id="sendTitle">Share this contact</div>
+        </div>
+        <button class="modal__close" id="sendClose" type="button">✕</button>
       </div>
-      <div id="modalBody" class="modal-body"></div>
+      <div class="modal__content">
+        <div class="sendGrid">
+          <div class="sendQr">
+            <div class="sendQrLabel">Scan to open on your phone</div>
+            <img id="sendQrImg" alt="QR code" />
+          </div>
+          <div class="sendActions">
+            <button class="btn btnPrimary btnFull" id="sendNativeShare" type="button">Share (AirDrop / Messages / Mail)</button>
+            <button class="btn btnGhost btnFull" id="sendCopy" type="button">Copy Link</button>
+            <a class="btn btnGhost btnFull" id="sendSms" href="#">Text Link</a>
+            <a class="btn btnGhost btnFull" id="sendMail" href="#">Email Link</a>
+            <div class="tinyNote">Tip: On desktop, “Share” may copy the link instead. QR always works.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script src="./app.js"></script>
+  <!-- Search modal (mobile Find) -->
+  <div class="modal" id="searchModal" aria-hidden="true">
+    <div class="modal__backdrop" id="searchBackdrop"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+      <div class="modal__header">
+        <div>
+          <div class="modal__kicker">FIND</div>
+          <div class="modal__title" id="searchTitle">Search employees</div>
+        </div>
+        <button class="modal__close" id="searchClose" type="button">✕</button>
+      </div>
+      <div class="modal__content">
+        <div class="rowInline">
+          <input id="searchInput" class="searchInput" list="employeeList" placeholder="Type a name…" autocomplete="off" />
+          <button id="searchGoBtn" class="searchGo" type="button">Open</button>
+        </div>
+        <div class="tinyNote" id="searchHint">Start typing “Taryn”…</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js?v=1"></script>
 </body>
 </html>
