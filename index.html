@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Highlight Industries – Digital Card</title>
+  <meta name="theme-color" content="#3F845B" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- DESKTOP (locked to desktop only via CSS media queries) -->
+  <main id="desktop" class="desktop" aria-label="Desktop digital card">
+    <header class="topbar">
+      <img class="header-banner" src="./assets/header.png" alt="Highlight Industries, Inc." />
+      <div class="search-row">
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="Search employees…" autocomplete="off" />
+          <div id="searchResults" class="search-results" role="listbox" aria-label="Employee search results"></div>
+        </div>
+        <button id="openBtn" class="btn btn-ghost" type="button" title="Open selected employee">Open</button>
+      </div>
+    </header>
+
+    <section class="desk-card" aria-live="polite">
+      <div class="desk-left">
+        <h1 class="name">
+          <span id="dFirst" class="first">TARYN</span><br />
+          <span id="dLast" class="last">SWAYZE</span>
+        </h1>
+
+        <div class="title-line">
+          <div class="underline"></div>
+          <div id="dTitle" class="title">Packaging Engineer</div>
+        </div>
+
+        <div class="info">
+          <div class="info-row">
+            <span class="icon">✉</span>
+            <a id="dEmail" href="mailto:taryns@highlightindustries.com">taryns@highlightindustries.com</a>
+          </div>
+          <div class="info-row">
+            <span class="icon">☎</span>
+            <a id="dPhone" href="tel:+16165312464">616-531-2464 x242</a>
+          </div>
+          <div class="info-row">
+            <span class="icon">⌂</span>
+            <a id="dWeb" href="https://www.highlightindustries.com" target="_blank" rel="noreferrer">www.highlightindustries.com</a>
+          </div>
+        </div>
+
+        <div class="desk-actions">
+          <button id="saveBtnDesktop" class="btn btn-solid" type="button">Save to Contacts</button>
+          <button id="sendBtnDesktop" class="btn btn-solid" type="button">Send to Phone</button>
+        </div>
+      </div>
+
+      <div class="desk-right">
+        <div class="green-circle"></div>
+        <div class="photo-wrap">
+          <img id="dPhoto" src="./assets/building.png" alt="Employee photo" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MOBILE (locked to mobile only via CSS media queries) -->
+  <main id="mobile" class="mobile" aria-label="Mobile digital card">
+    <div class="mobile-hero">
+      <div class="mobile-green"></div>
+      <img class="mobile-logo" src="./assets/header.png" alt="Highlight Industries, Inc." />
+      <div class="mobile-photo-ring">
+        <img id="mPhoto" src="./assets/building.png" alt="Employee photo" />
+      </div>
+    </div>
+
+    <section class="mobile-body" aria-live="polite">
+      <h1 class="m-name">
+        <span id="mFirst" class="m-first">TARYN</span><br/>
+        <span id="mLast" class="m-last">SWAYZE</span>
+      </h1>
+
+      <div id="mTitle" class="m-title">Packaging Engineer</div>
+
+      <div class="m-qr">
+        <div class="qr-label">Share</div>
+        <img id="mQrImg" alt="QR code" />
+      </div>
+
+      <div class="m-info">
+        <div class="m-row">
+          <span class="m-ic">✉</span>
+          <a id="mEmail" href="mailto:taryns@highlightindustries.com">taryns@highlightindustries.com</a>
+        </div>
+        <div class="m-row">
+          <span class="m-ic">☎</span>
+          <a id="mPhone" href="tel:+16165312464">616-531-2464 x242</a>
+        </div>
+        <div class="m-row">
+          <span class="m-ic">⌂</span>
+          <a id="mWeb" href="https://www.highlightindustries.com" target="_blank" rel="noreferrer">www.highlightindustries.com</a>
+        </div>
+      </div>
+
+      <div class="m-actions">
+        <button id="saveBtnMobile" class="btn btn-dark" type="button">Save</button>
+        <button id="shareBtnMobile" class="btn btn-dark" type="button">Share</button>
+        <button id="findBtnMobile" class="btn btn-dark" type="button">Find</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div id="modalBackdrop" class="backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div id="modalTitle" class="modal-title">Send to Phone</div>
+        <button id="closeModal" class="btn btn-ghost" type="button">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
