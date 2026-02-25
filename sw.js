@@ -1,5 +1,5 @@
-const CACHE="highlight-card-newdesign-v1";
-const ASSETS=[
+const CACHE = "highlight-contact-newdesign-v1";
+const CORE = [
   "./",
   "./index.html",
   "./styles.css",
@@ -7,38 +7,37 @@ const ASSETS=[
   "./employees.csv",
   "./manifest.webmanifest",
   "./assets/header.png",
-  "./assets/building.png",
-  "./assets/jessica-flanders.png",
   "./assets/icon-192.png",
-  "./assets/icon-512.png"
+  "./assets/icon-512.png",
+  "./assets/building.jpg",
+  "./assets/people/jessica-flanders.jpg"
 ];
 
-self.addEventListener("install",(e)=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)));
+  self.skipWaiting();
 });
 
-self.addEventListener("activate",(e)=>{
+self.addEventListener("activate", (e) => {
   e.waitUntil(
-    caches.keys().then(keys=>Promise.all(keys.map(k=>k!==CACHE ? caches.delete(k):null)))
-    .then(()=>self.clients.claim())
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((k) => (k !== CACHE ? caches.delete(k) : null)))
+    )
   );
+  self.clients.claim();
 });
 
-self.addEventListener("fetch",(e)=>{
-  const req=e.request;
-  if(req.method!=="GET") return;
-
-  // Network-first for QR images (external), cache-first for local assets
-  const url=new URL(req.url);
-  if(url.origin!==location.origin){
-    return; // let browser handle
-  }
-
+self.addEventListener("fetch", (e) => {
   e.respondWith(
-    caches.match(req).then(cached=> cached || fetch(req).then(res=>{
-      const copy=res.clone();
-      caches.open(CACHE).then(cache=>cache.put(req, copy)).catch(()=>{});
-      return res;
-    }).catch(()=>cached))
+    caches.match(e.request, { ignoreSearch: true }).then((cached) => {
+      if (cached) return cached;
+      return fetch(e.request)
+        .then((resp) => {
+          const copy = resp.clone();
+          caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
+          return resp;
+        })
+        .catch(() => caches.match("./index.html"));
+    })
   );
 });
